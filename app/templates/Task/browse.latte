@@ -1,0 +1,68 @@
+{block content}
+
+<h2 n:block="title">Procházet úkoly</h2>
+
+<table class="tasks">
+    <thead>
+    <tr>
+        <th class="created">&nbsp;</th>
+        <th class="list">Název</th>
+        <th class="text">Popis</th>
+        <th class="user">Zadavatel</th>
+        <th class="user">Řešitel</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $tasks as $task}
+        <tr n:class="$iterator->isOdd() ? odd : even, $task->splneno ? splneno">
+            <td class="created">{$task->datum|date:'j. n. Y'}</td>
+            <td class="list"><a n:href="Profile:task $task->ID">{$task->nazev}</a></td>
+            <td class="text">{$task->popis}</td>
+            <td class="user"><a n:href="Profile:user $task->zadavatelID">{$task->zadavatel}</td>
+            {if $task->resitel}
+                <td class="user"><a n:href="Profile:user $task->resitelID">{$task->resitel}</a></td>
+            {elseif $user->getIdentity()->rules == 0}
+                <td class="user">Nelze</td>
+            {elseif $task->jsemVlastnik}
+                <td class="user">Nelze</td>
+            {elseif $task->jizzabrano}
+                <td class="user"><a n:href="Task:browse ,'odebrat', $task->ID">Odebrat</a></td>
+            {else}
+                <td class="user"><a n:href="Task:browse ,'zabrat', $task->ID">Zabrat</a></td>
+            {/if}
+        </tr>
+    {/foreach}
+    </tbody>
+</table>
+</div>
+{*
+<div class="listovani">
+            <a class="odkaz" n:href="Task:browse, 0">Začátek</a>
+            {if ($todo)>0}
+                <a class="odkaz" n:href="Task:browse, $todo-1">Zpět</a>
+            {else}
+                <span class="odkaz">Zpět</span>
+            {/if}
+    {foreach $navigace as $list}
+        
+            {if $list<10}
+                <a class="odkaz" n:href="Task:browse, $list">{$list}</a>
+            {else}
+                {if $list%10<=50}
+                    {if $list%10==0}
+                        <a class="odkaz" n:href="Task:browse, $list">{$list}</a>
+                    {/if}
+                {/if}
+  
+        {/if}
+    {/foreach}            
+           {if ($todo)<max($navigace)}
+                <a class="odkaz" n:href="Task:browse, $todo+1">Další</a>
+            {else}
+                <span class="odkaz">Další</span>
+            {/if}
+            <a class="odkaz" n:href="Task:browse, max($navigace)">Poslední</a>
+            VYKOMENTOVÁNO
+*}
+</div>
+{/block}

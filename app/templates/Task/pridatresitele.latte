@@ -1,0 +1,37 @@
+{block content}
+
+<h2 n:block="title">Přidat řešitele</h2>
+
+
+<table class="tasks">
+    <thead>
+    <tr>
+        <th class="created">&nbsp;</th>
+        <th class="list">Název</th>
+        <th class="text">Popis</th>
+        <th class="user">Řešitelé</th>
+        <th class="user">Přidělit</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $tasks as $task}
+        {form formVybratResitele}
+            {?$presenter['formVybratResitele']['ukol']->value = $task->ID;}
+            <tr n:class="$iterator->isOdd() ? odd : even, $task->splneno ? splneno">
+                <td class="created">{$task->datum|date:'j. n. Y'}</td>
+                <td class="list"><a n:href="Profile:task $task->ID">{$task->nazev}</a></td>
+                <td class="text">{$task->popis}</td>
+                <td class="user">{$task->count}</td>
+                {if $task->count>0}
+                    <td class="user"><a n:href="Task:pridelit $task->ID">Přidělit řešitele</a></td>
+                {else}
+                    <td class="user">Nelze</td>
+                {/if}
+             </tr> 
+             {input ukol}
+        {/form}
+    {/foreach}
+    </tbody>
+</table>
+</div>
+{/block}

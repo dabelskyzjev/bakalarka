@@ -1,0 +1,22 @@
+{block #content}
+
+<h2 n:block="title">Profil: {$profile->username}</h2>
+
+<div>
+    <p>Jméno: {$profile->name}</p>
+    <p>Email: {$profile->email}</p>
+    {if $profile->rules==0}
+    <p>Typ účtu: Zadavatel</p>
+    {elseif $profile->rules==1}
+    <p>Typ účtu: Programátor</p>
+    {elseif $profile->rules==2}
+    <p>Typ účtu: Moderátor</p>
+    {elseif $profile->rules==10}
+    <p>Typ účtu: Administrátor</p>
+    {/if}
+    <p>Rating: {$profile->rating}</p>
+    <p>Datum registrace: {$profile->datum|date:'d.m.Y h:i:s'}</p>
+
+    <p>Podpis: {$profile->podpis}</p>
+</div>
+{/block}

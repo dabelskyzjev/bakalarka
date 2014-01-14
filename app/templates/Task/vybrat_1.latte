@@ -1,0 +1,34 @@
+{block content}
+
+<h2 n:block="title">Vybrat řešitele</h2>
+
+
+<table class="tasks">
+    <thead>
+    <tr>
+        <th class="created">&nbsp;</th>
+        <th class="list">Název</th>
+        <th class="text">Popis</th>
+        <th class="user">Řešitel</th>
+        <th class="action"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $tasks as $task}
+        {form formVybratResitele}
+            {?$presenter['formVybratResitele']['ukol']->value = $task->ID;}
+            {?$presenter['formVybratResitele']['resitele']->items = $presenter->naplnSelectBoxVyber($task->ID);}
+            <tr n:class="$iterator->isOdd() ? odd : even, $task->splneno ? splneno">
+                <td class="created">{$task->datum|date:'j. n. Y'}</td>
+                <td class="list"><a n:href="Profile:task $task->ID">{$task->nazev}</a></td>
+                <td class="text">{$task->popis}</td>
+                <td class="user">{input resitele}</td>
+                <td class="">{input vybrat}</td>
+             </tr> 
+             {input ukol}
+        {/form}
+    {/foreach}
+    </tbody>
+</table>
+</div>
+{/block}

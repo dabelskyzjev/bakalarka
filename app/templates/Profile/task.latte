@@ -1,0 +1,23 @@
+{block content}
+
+<h2 n:block="title">Úloha: {$task->nazev}</h2>
+
+<div>
+    <p>ID Úlohy: {$task->ID}</p>
+    <p>Vytvořeno: {$task->datum|date:'d.m.Y h:i:s'}</p>
+    <p>Zadavatel: <a n:href="Profile:user $task->zadavatelID ">{$task->zadavatel}</a></p>
+    <p>Popis: {$task->popis}</p>
+    {if $task->resitelID==NULL}
+    <p>Řešitel: Úkol nemá řešitele</p>
+    {else $task->resitelID==NULL}
+    <p>Řešitel: <a n:href="Profile:user $task->resitelID">{$task->resitel}</a></p>
+    {/if}
+    <p>Splněno: {$task->splneno}</p>
+    <p>Storno: {$task->storno}</p>
+    {if $task->splneno=="Ne"}
+        {if $task->markAsDone}
+            <p><a n:href="Task:default, 'oznacit', $task->ID">Hotovo!</a></p>
+        {/if}
+    {/if}
+</div>
+{/block}

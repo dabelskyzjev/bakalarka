@@ -1,0 +1,36 @@
+{var $robots = noindex}
+
+{block #content}
+
+<h1 n:block="title">Registrace</h1>
+
+{form newRegistraceForm}
+<div class="sign-in-form">
+    {control $form errors}
+
+    <div class="pair">
+        {label username /}
+        <div class="input">{input username}</div>
+    </div>
+    <div class="pair">
+        {label password /}
+        <div class="input">{input password}</div>
+    </div>
+    <div class="pair">
+        {label passwordcheck /}
+        <div class="input">{input passwordcheck}</div>
+    </div>
+    <div class="pair">
+        {label role /}
+        <div class="input">{input role}</div>
+    </div>
+    <div class="pair">
+    {label email /}
+        <div class="input">{input email}</div>
+    </div>
+
+    <div class="pair">
+        <div class="input">{input login}</div>
+    </div>
+</div>
+{/form}

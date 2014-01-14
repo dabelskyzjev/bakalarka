@@ -1,0 +1,13 @@
+{block #content}
+
+<h2 n:block="title">Přidělit řešitele</h2>
+{foreach $profile as $p}
+    <div class="minprofile">
+        <p class="ucet">Účet: <a n:href="Profile:user $p->resitelID">{$p->resitel}</a></p>
+        <p class="jmeno">Jméno: {$p->name}</p>
+        <p class="rating">Rating: {$p->rating}</p>
+        <p class="podpis">Podpis: {$p->podpis}</p>
+        <p class="pridelit"><a n:href="Task:vybrat, $p->ulohaID, $p->resitelID">Přidělit</a></p>
+    </div>
+{/foreach}
+{/block}

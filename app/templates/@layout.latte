@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="robots" content="{$robots}" n:ifset="$robots">
+
+	<title>{block title|stripTags|trim}{/block} | Úkolníček</title>
+
+	<link rel="stylesheet" href="{$basePath}/css/screen.css">
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	{block head}
+
+        {/block}
+    </head>
+
+    <body>
+        <div id="header">
+            <div id="header-inner">
+                <div class="title"><a n:href="Homepage:">Bakalářský Projekt</a></div>
+
+                {if $user->isLoggedIn()}
+		    <div class="user">
+			<span class="icon user">{$user->getIdentity()->name}</span> |
+			<a n:href="User:password">Nastavení</a> |
+			<a n:href="signOut!">Odhlásit se</a>
+		    </div>
+                {/if}
+            </div>
+        </div>
+
+        <div id="container">
+	    <div id="sidebar">
+		{if $user->isLoggedIn()}
+		    <div id="navigace">
+			<ul>
+			    <li><a n:href="Homepage:default">Domů</a></li>
+			    <li><a n:href="Task:default">Moje úkoly</a></li>
+
+			    {if $user->getIdentity()->rules == 0}
+				<li><a n:href="Task:create">Vytvořit úkol</a></li>
+				{/if}
+
+			    <li><a n:href="Task:browse">Procházet úkoly</a></li>
+
+			    {if $user->getIdentity()->rules == 1}
+				<li><a n:href="Task:zabrane">Zabrané úkoly</a></li>
+				{/if}
+
+
+			    {if $user->getIdentity()->rules == 0}
+				<li><a n:href="Task:vybrat">Vybrat řešitele</a></li>
+				{/if}
+			    <li><a n:href="Task:done">Hotové úkoly</a></li>
+			</ul>
+		    </div>
+		{/if}
+	    </div>
+
+	    <div id="content">
+		{snippet flashMessages}
+                    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+                {/snippet}
+
+		{include #content}
+	    </div>
+
+	    <div id="footer">
+
+	    </div>
+	</div>
+
+	{block scripts}
+	<script src="{$basePath}/js/jquery.js"></script>
+	<script src="{$basePath}/js/netteForms.js"></script>
+	<script src="{$basePath}/js/main.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/ajax.js"></script>
+	{/block}
+	
+    </body>
+</html>

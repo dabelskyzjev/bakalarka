@@ -1,0 +1,23 @@
+{block #content}
+
+<h2 n:block="title">Vytvořit nový úkol</h2>
+<div>
+    {form newTaskForm}
+        {control $form errors}
+
+        <div class="pair">
+            {label nazev /}
+            <div class="input">{input nazev}</div>
+        </div>
+        <div class="pair">
+            {label popis /}
+            <div class="input">{input popis}</div>
+        </div>
+        <div class="pair">
+            <div class="input">{input create}</div>
+        </div>
+    {/form}
+</div>
+
+{/block}
+

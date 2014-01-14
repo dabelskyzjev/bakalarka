@@ -1,0 +1,28 @@
+{block content}
+
+<h2 n:block="title"></h2>
+    <h2>Zabrané úkoly</h2>
+
+
+<table class="tasks">
+    <thead>
+    <tr>
+        <th class="created">&nbsp;</th>
+        <th class="list">Název</th>
+        <th class="text">Popis</th>
+        <th class="user">Zadavatel</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $tasks as $task}
+        <tr n:class="$iterator->isOdd() ? odd : even">
+            <td class="created">{$task->datum|date:'j. n. Y'}</td>
+            <td class="list">{$task->nazev}</td>
+            <td class="text">{$task->popis}</td>
+            <td class="user">{$task->zadavatel}</td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>
+</div>
+{/block}
